@@ -1,23 +1,37 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import './App.css';
 
 function App() {
+  const [post, setPost] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('Submitted Post:', post);
+    setPost('');
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container fluid className="App-header">
+        <Row className="justify-content-md-center">
+          <Col md={6}>
+            <h1>Blog Post Submission</h1>
+            <Form onSubmit={handleSubmit} className="mb-3">
+              <Form.Group className="mb-3">
+                <Form.Control 
+                  type="text" 
+                  placeholder="Write your post here" 
+                  value={post} 
+                  onChange={(e) => setPost(e.target.value)}
+                  className="rounded-0"
+                />
+              </Form.Group>
+              <Button variant="dark" type="submit" className="rounded-0">Submit Post</Button>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
