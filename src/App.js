@@ -2,15 +2,18 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import './App.css';
 
+import { useDispatch } from 'react-redux';
+import { addPost } from './postsSlice';
+
 function App() {
   const [post, setPost] = useState('');
+  const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Submitted Post:', post);
+    dispatch(addPost(post));
     setPost('');
   };
-
   return (
     <div className="App">
       <Container fluid className="App-header">
