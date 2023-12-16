@@ -4,6 +4,7 @@ import './App.css';
 
 import { useDispatch } from 'react-redux';
 import { addPost } from './postsSlice';
+import PostsList from './PostsList'; 
 
 function App() {
   const [post, setPost] = useState('');
@@ -14,6 +15,7 @@ function App() {
     dispatch(addPost(post));
     setPost('');
   };
+  
   return (
     <div className="App">
       <Container fluid className="App-header">
@@ -32,6 +34,12 @@ function App() {
               </Form.Group>
               <Button variant="dark" type="submit" className="rounded-0">Submit Post</Button>
             </Form>
+          </Col>
+        </Row>
+        <Row className="justify-content-md-center mt-4">
+          <Col md={6}>
+            <h2>Recent Posts</h2>
+            <PostsList /> {/* Use the PostsList component */}
           </Col>
         </Row>
       </Container>

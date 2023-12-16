@@ -12,3 +12,48 @@
 .form-control, .btn {
   border-radius: 0.25rem; /* Less rounded corners */
 }
+
+.list-group {
+  width: 100%; /* Set the width of the list group */
+  max-width: 600px; /* Maximum width of the list */
+  margin: 0 auto; /* Center the list */
+  padding: 0; /* Remove default padding */
+}
+
+.list-group-item {
+  background-color: #1c1e22; /* Modern dark grey background */
+  color: #ccc; /* Light grey text for better readability */
+  border: 1px solid #2a2d33; /* Slightly darker border for definition */
+  margin-bottom: 0.5rem; /* Spacing between list items */
+  transition: all 0.2s; /* Smooth transition for hover effects */
+  border-radius: 0.25rem; /* Slightly rounded corners for a modern look */
+}
+
+.list-group-item:hover {
+  background-color: #2a2d33; /* Darker background on hover */
+  color: #fff; /* White text on hover for contrast */
+  border-color: #333; /* Dark border on hover */
+  transform: translateY(-2px); /* Slight lift effect on hover */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+/* Typography improvements */
+.list-group-item p {
+  font-size: 1rem;
+  font-weight: 300;
+  margin: 0; /* Keep the text aligned with the container's edges */
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Add ellipsis to overflow text */
+}
+
+/* Clear margins for headers to align with the design */
+.App-header h1, .App-header h2 {
+  margin-bottom: 1rem; /* Consistent space below headers */
+}
+
+/* Remove any default list styles */
+.list-group-item {
+  list-style-type: none; /* Remove default list item styling */
+  padding: 0.75rem 1rem; /* Comfortable padding around text */
+}
