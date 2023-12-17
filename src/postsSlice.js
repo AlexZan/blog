@@ -8,36 +8,52 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
   return posts;
 });
 
+// Async thunk for adding a new post
+export const addPost = createAsyncThunk('posts/addPost', async (postContent) => {
+  const response = await fetch('http://localhost:5000/posts', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ post: postContent }),
+  });
+
+  if (response.ok) {
+    return postContent;
+  }
+
+  // Handle errors
+  throw new Error('Failed to add post');
+});
+
 export const postsSlice = createSlice({
   name: 'posts',
   initialState: {
     posts: [],
-    status: 'idle', // Represents the loading state
+    status: 'idle',
   },
   reducers: {
-    // Update the addPost reducer to make an API call
-    addPost: (state, action) => {
-      // Since we'll be fetching the updated list after adding,
-      // we don't need to push the new post into state.posts here anymore
-    },
+    // Reducers if needed
   },
   extraReducers: (builder) => {
     builder
-    .addCase(fetchPosts.pending, (state) => {
-      state.status = 'loading';
-    })
-    .addCase(fetchPosts.fulfilled, (state, action) => {
-      state.status = 'succeeded';
-      // Add any fetched posts to the array
-      state.posts = action.payload;
-    })
-    .addCase(fetchPosts.rejected, (state) => {
-      state.status = 'failed';
-    });
+      // Handle fetchPosts async thunk actions
+      .addCase(fetchPosts.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchPosts.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.posts = action.payload;
+      })
+      .addCase(fetchPosts.rejected, (state) => {
+        state.status = 'failed';
+      })
+      // Handle addPost async thunk actions
+      .addCase(addPost.fulfilled, (state, action) => {
+        // Assuming the backend returns the added post
+        state.posts.push(action.payload);
+      });
   },
 });
-
-// Export the action creators you need
-export const { /* addPost, other actions */ } = postsSlice.actions;
 
 export default postsSlice.reducer;
