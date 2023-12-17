@@ -12,7 +12,6 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(addPost(post));
     setPost('');
   };
   
