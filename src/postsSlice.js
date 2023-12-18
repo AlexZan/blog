@@ -9,21 +9,29 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
 });
 
 // Async thunk for adding a new post
-export const addPost = createAsyncThunk('posts/addPost', async (postContent) => {
-  const response = await fetch('http://localhost:5000/posts', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ post: postContent }),
-  });
+export const addPost = createAsyncThunk('posts/addPost', async (postContent, { rejectWithValue }) => {
+  try {
+    const response = await fetch('http://localhost:5000/posts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ post: postContent }), // Ensure this matches your backend's expected format
+    });
 
-  if (response.ok) {
-    return postContent;
+    if (!response.ok) {
+      // Handle non-2xx responses
+      throw new Error('Network response was not ok');
+    }
+
+    // Assuming the response includes the full post object
+    const newPost = await response.json();
+    return newPost; // Return the full post object
+
+  } catch (error) {
+    // Handle errors by passing them to rejectWithValue
+    return rejectWithValue(error.message);
   }
-
-  // Handle errors
-  throw new Error('Failed to add post');
 });
 
 export const postsSlice = createSlice({

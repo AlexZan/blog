@@ -10,8 +10,8 @@ const PostsList = () => {
   return (
     <ListGroup variant="flush">
       {posts.map((post, index) => (
-        <ListGroup.Item key={index} className="text-start">
-          {post.substring(0, 100)}{post.length > 100 ? '...' : ''}
+        <ListGroup.Item key={post._id || index} className="text-start">
+          {post.content.substring(0, 100)}{post.content.length > 100 ? '...' : ''}
         </ListGroup.Item>
       ))}
     </ListGroup>
