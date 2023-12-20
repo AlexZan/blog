@@ -1,27 +1,40 @@
 // src/App.js
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
-import PostForm from './PostForm'; // Import the new component
+import Admin from './Admin';
+import PostsList from './PostsList';
 import { useDispatch } from 'react-redux';
-import PostsList from './PostsList'; 
 import { fetchPosts } from './postsSlice';
 
 function App() {
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
 
+  // Define the routes
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: (
+        <Container fluid className="App-header">
+          <h2>Recent Posts</h2>
+          <PostsList />
+        </Container>
+      ),
+    },
+    {
+      path: '/admin',
+      element: <Admin />,
+    },
+  ]);
 
   return (
     <div className="App">
-      <Container fluid className="App-header">
-        <PostForm />
-        <h2>Recent Posts</h2>
-        <PostsList />
-      </Container>
+      <RouterProvider router={router} />
     </div>
   );
 }
