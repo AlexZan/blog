@@ -5,17 +5,18 @@ import { useDispatch } from 'react-redux';
 import { addPost } from './postsSlice';
 
 const PostForm = () => {
-    const [post, setPost] = useState('');
-    const dispatch = useDispatch();
-  
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      if (!post.trim()) return;
-  
-      // Dispatch the addPost action
-      dispatch(addPost(post));
-      setPost('');
-    };
+  const [post, setPost] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!post.trim()) return;
+
+    // Dispatch the addPost action with post content and password
+    dispatch(addPost({ content: post, password }));
+    setPost('');
+  };
 
   return (
     <Row className="justify-content-md-center">
@@ -28,6 +29,15 @@ const PostForm = () => {
               placeholder="Write your post here"
               value={post}
               onChange={(e) => setPost(e.target.value)}
+              className="rounded-0"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Control
+              type="password"
+              placeholder="Admin Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="rounded-0"
             />
           </Form.Group>

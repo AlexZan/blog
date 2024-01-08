@@ -9,14 +9,14 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
 });
 
 // Async thunk for adding a new post
-export const addPost = createAsyncThunk('posts/addPost', async (postContent, { rejectWithValue }) => {
+export const addPost = createAsyncThunk('posts/addPost', async ({ content, password }, { rejectWithValue }) => {
   try {
     const response = await fetch('http://localhost:5000/posts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ post: postContent }), // Ensure this matches your backend's expected format
+      body: JSON.stringify({ post: content, password }),
     });
 
     if (!response.ok) {
