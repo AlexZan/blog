@@ -1,59 +1,116 @@
 .App {
   text-align: center;
-  background-color: #121212; /* Constant dark background for the whole app */
-  min-height: 100vh; /* Ensures the background covers the whole viewport height */
+  background-color: #121212;
+  /* Constant dark background for the whole app */
+  min-height: 100vh;
+  /* Ensures the background covers the whole viewport height */
 }
 
 .App-header {
-  padding: 2rem 0; /* Added padding for better spacing */
+  padding: 2rem 0;
+  /* Added padding for better spacing */
 }
 
 /* Reduce the default border-radius for all form inputs and buttons */
-.form-control, .btn {
-  border-radius: 0.25rem; /* Less rounded corners */
+.form-control,
+.btn {
+  border-radius: 0.25rem;
+  /* Less rounded corners */
 }
 
 .list-group {
-  width: 100%; /* Set the width of the list group */
-  max-width: 600px; /* Maximum width of the list */
-  margin: 0 auto; /* Center the list */
-  padding: 0; /* Remove default padding */
+  width: 100%;
+  /* Set the width of the list group */
+  max-width: 600px;
+  /* Maximum width of the list */
+  margin: 0 auto;
+  /* Center the list */
+  padding: 0;
+  /* Remove default padding */
 }
 
 .list-group-item {
-  background-color: #1c1e22; /* Modern dark grey background */
-  color: #ccc; /* Light grey text for better readability */
-  border: 1px solid #2a2d33; /* Slightly darker border for definition */
-  margin-bottom: 0.5rem; /* Spacing between list items */
-  transition: all 0.2s; /* Smooth transition for hover effects */
-  border-radius: 0.25rem; /* Slightly rounded corners for a modern look */
+  background-color: #1c1e22;
+  /* Modern dark grey background */
+  color: #ccc;
+  /* Light grey text for better readability */
+  border: 1px solid #2a2d33;
+  /* Slightly darker border for definition */
+  margin-bottom: 0.5rem;
+  /* Spacing between list items */
+  transition: all 0.2s;
+  /* Smooth transition for hover effects */
+  border-radius: 0.25rem;
+  /* Slightly rounded corners for a modern look */
 }
 
 .list-group-item:hover {
-  background-color: #2a2d33; /* Darker background on hover */
-  color: #fff; /* White text on hover for contrast */
-  border-color: #333; /* Dark border on hover */
-  transform: translateY(-2px); /* Slight lift effect on hover */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  background-color: #2a2d33;
+  /* Darker background on hover */
+  color: #fff;
+  /* White text on hover for contrast */
+  border-color: #333;
+  /* Dark border on hover */
+  transform: translateY(-2px);
+  /* Slight lift effect on hover */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  /* Subtle shadow for depth */
 }
 
 /* Typography improvements */
 .list-group-item p {
   font-size: 1rem;
   font-weight: 300;
-  margin: 0; /* Keep the text aligned with the container's edges */
-  white-space: nowrap; /* Prevent text wrapping */
-  overflow: hidden; /* Hide overflow text */
-  text-overflow: ellipsis; /* Add ellipsis to overflow text */
+  margin: 0;
+  /* Keep the text aligned with the container's edges */
+  white-space: nowrap;
+  /* Prevent text wrapping */
+  overflow: hidden;
+  /* Hide overflow text */
+  text-overflow: ellipsis;
+  /* Add ellipsis to overflow text */
 }
 
 /* Clear margins for headers to align with the design */
-.App-header h1, .App-header h2 {
-  margin-bottom: 1rem; /* Consistent space below headers */
+.App-header h1,
+.App-header h2 {
+  margin-bottom: 1rem;
+  /* Consistent space below headers */
 }
 
 /* Remove any default list styles */
 .list-group-item {
-  list-style-type: none; /* Remove default list item styling */
-  padding: 0.75rem 1rem; /* Comfortable padding around text */
+  list-style-type: none;
+  /* Remove default list item styling */
+  padding: 0.75rem 1rem;
+  /* Comfortable padding around text */
+}
+
+.post-link {
+  color: #333;
+  /* Dark text for readability */
+  text-decoration: none;
+  /* No underline */
+  display: block;
+  padding: .75rem 1.25rem;
+  border-radius: .25rem;
+  transition: background-color .2s ease-in-out;
+}
+
+.post-link:hover,
+.post-link:focus {
+  background-color: #f8f9fa;
+  text-decoration: none;
+  color: #578dc7;
+}
+
+.list-group-item {
+  cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+  .post-link {
+    padding: .5rem 1rem;
+  }
 }

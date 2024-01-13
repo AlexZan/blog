@@ -7,6 +7,7 @@ import Admin from './Admin';
 import PostsList from './PostsList';
 import { useDispatch } from 'react-redux';
 import { fetchPosts } from './postsSlice';
+import SinglePostView from './SinglePostView';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,10 @@ function App() {
     {
       path: '/admin',
       element: <Admin />,
+    },
+    {
+      path: '/posts/:postId', // Route with a path parameter
+      element: <SinglePostView />,
     },
   ]);
 
