@@ -114,3 +114,99 @@
     padding: .5rem 1rem;
   }
 }
+
+/* src/SinglePostView.css */
+.single-post-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.post-card {
+  width: 100%;
+  max-width: 600px; /* Adjust the width as needed */
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0
+
+px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.post-title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.post-content {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.post-date {
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+.post-loading,
+.post-error {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .post-card {
+    margin: 10px;
+    padding: 15px;
+  }
+}
+
+/* src/HeaderBar.css */
+.header-bar {
+  background-color: #333; /* Adjust the background color as needed */
+  color: #fff;
+  padding: 10px 20px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between; /* This ensures space around items */
+  align-items: center;
+  position: relative; /* Allows absolute positioning relative to this container */
+  width: 100%;
+}
+
+.nav-spacer {
+  flex: 1; /* Spacers take up equal space */
+}
+
+.home-link {
+  color: #fff;
+  text-decoration: none;
+  position: absolute; /* Absolute position the home link */
+  left: 20px; /* Adjust as needed for proper spacing */
+  top: 50%;
+  transform: translateY(-50%); /* Center vertically */
+
+
+  z-index: 10; /* Ensure the link is above the spacers */
+}
+
+.blog-title {
+  color: #fff; /* Title color */
+  font-size: 1.5rem; /* Title size */
+  flex: 0 0 auto; /* Don't grow or shrink */
+  text-align: center; /* Center the text */
+}
+
+
+
+.home-link:hover,
+.home-link:focus {
+  text-decoration: underline; /* Underline on hover/focus for better interactivity */
+}

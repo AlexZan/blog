@@ -1,37 +1,38 @@
 // src/SinglePostView.js
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchSinglePost } from './postsSlice';
 
 const SinglePostView = () => {
-  const [post, setPost] = useState(null);
-  const { postId } = useParams(); // Get the post ID from URL params
+  const { postId } = useParams();
+  const dispatch = useDispatch();
+  const post = useSelector((state) => state.posts.singlePost);
+  const status = useSelector((state) => state.posts.singlePostStatus);
 
   useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const response = await fetch(`http://localhost:5000/posts/${postId}`);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const postData = await response.json();
-        setPost(postData);
-      } catch (error) {
-        console.error('Fetch error:', error);
-      }
-    };
+    if (postId) {
+      dispatch(fetchSinglePost(postId));
+    }
+  }, [postId, dispatch]);
 
-    fetchPost();
-  }, [postId]);
-
-  if (!post) {
-    return <div>Loading...</div>;
+  if (status === 'loading') {
+    return <div className="post-loading">Loading...</div>;
+  } else if (status === 'failed' || !post) {
+    return <div className="post-error">Unable to fetch post.</div>;
   }
 
+  // Convert ObjectId to a readable date
+  const postDate = post._id ? new Date(parseInt(post._id.substring(0, 8), 16) * 1000) : new Date();
+  
   return (
-    <div>
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
+    <div className="single-post-container">
+      <div className="post-card">
+        <h1 className="post-title">{post.title}</h1>
+        <p className="post-content">{post.content}</p>
+        <p className="post-date text-muted">{postDate.toLocaleDateString()}</p>
+      </div>
     </div>
   );
 };

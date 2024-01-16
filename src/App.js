@@ -8,6 +8,7 @@ import PostsList from './PostsList';
 import { useDispatch } from 'react-redux';
 import { fetchPosts } from './postsSlice';
 import SinglePostView from './SinglePostView';
+import HeaderBar from './HeaderBar';
 
 function App() {
   const dispatch = useDispatch();
@@ -21,19 +22,32 @@ function App() {
     {
       path: '/',
       element: (
-        <Container fluid className="App-header">
-          <h2>Recent Posts</h2>
-          <PostsList />
-        </Container>
+        <>
+          <HeaderBar />
+          <Container fluid className="App-header">
+            <h2>Recent Posts</h2>
+            <PostsList />
+          </Container>
+        </>
       ),
     },
     {
       path: '/admin',
-      element: <Admin />,
+      element: (
+        <>
+          <HeaderBar />
+          <Admin />
+        </>
+      ),
     },
     {
       path: '/posts/:postId', // Route with a path parameter
-      element: <SinglePostView />,
+      element: (
+        <>
+          <HeaderBar />
+          <SinglePostView />
+        </>
+      ),
     },
   ]);
 

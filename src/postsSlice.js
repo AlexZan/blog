@@ -8,6 +8,22 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
   return posts;
 });
 
+// Async thunk for fetching a single post
+export const fetchSinglePost = createAsyncThunk('posts/fetchSinglePost', async (postId, { rejectWithValue }) => {
+  try {
+    const response = await fetch(`http://localhost:5000/posts/${postId}`);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const singlePost = await response.json();
+    return singlePost;
+  } catch (error) {
+   
+
+return rejectWithValue(error.message);
+  }
+});
+
 // Async thunk for adding a new post
 export const addPost = createAsyncThunk('posts/addPost', async ({ content, password }, { rejectWithValue }) => {
   try {
@@ -39,6 +55,8 @@ export const postsSlice = createSlice({
   initialState: {
     posts: [],
     status: 'idle',
+    singlePost: null,
+    singlePostStatus: 'idle',
   },
   reducers: {
     // Reducers if needed
@@ -60,6 +78,17 @@ export const postsSlice = createSlice({
       .addCase(addPost.fulfilled, (state, action) => {
         // Assuming the backend returns the added post
         state.posts.push(action.payload);
+      })    
+      .addCase(fetchSinglePost.pending, (state) => {
+        state.singlePostStatus = 'loading';
+      })
+      .addCase(fetchSinglePost.fulfilled, (state, action) => {
+        state.singlePostStatus = 'succeeded';
+        state.singlePost = action.payload;
+      })
+      .addCase(fetchSinglePost.rejected, (state) => {
+        state.singlePostStatus = 'failed';
+        state.singlePost = null;
       });
   },
 });
