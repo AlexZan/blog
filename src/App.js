@@ -1,7 +1,7 @@
 // src/App.js
 import React, { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 import Admin from './Admin';
 import PostsList from './PostsList';
@@ -17,8 +17,8 @@ function App() {
     dispatch(fetchPosts());
   }, [dispatch]);
 
-  // Define the routes
-  const router = createBrowserRouter([
+  // Define the routes using createHashRouter
+  const router = createHashRouter([
     {
       path: '/',
       element: (

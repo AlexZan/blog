@@ -1,9 +1,11 @@
 // src/postsSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 // Async thunk for fetching posts
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  const response = await fetch('http://localhost:5000/posts');
+  const response = await fetch(`${API_URL}/posts`);
   const posts = await response.json();
   return posts;
 });
@@ -11,7 +13,7 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
 // Async thunk for fetching a single post
 export const fetchSinglePost = createAsyncThunk('posts/fetchSinglePost', async (postId, { rejectWithValue }) => {
   try {
-    const response = await fetch(`http://localhost:5000/posts/${postId}`);
+    const response = await fetch(`${API_URL}/posts/${postId}`);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -27,7 +29,7 @@ return rejectWithValue(error.message);
 // Async thunk for adding a new post
 export const addPost = createAsyncThunk('posts/addPost', async ({ content, password }, { rejectWithValue }) => {
   try {
-    const response = await fetch('http://localhost:5000/posts', {
+    const response = await fetch(`${API_URL}/posts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
